@@ -182,7 +182,7 @@ def load_bp(oauth):
         if get_config("user_mode") == "teams":
             scope = "profile team"
         else:
-            scope = "openid profile roles"
+            scope = "openid profile email roles"
 	
 	#client_id in database this is set in Keycloak
         client_id = client.client_id
