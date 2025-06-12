@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+	<div class="container">
+		{% if client=="" %}
+			<h1>Add OAuth2  client</h1>
+		{% else %}
+			<h1>Modify OAuth2 client</h1>
+		{% endif %}
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			{% include "components/errors.html" %}
+
+			<form method="post" accept-charset="utf-8" autocomplete="off">
+				<div class="form-group">
+					{% if modify_client %}
+        					<input type="hidden" name="modify_client" value=modify>
+					{% else %}
+						<input type="hidden" name="modify_client" value=no_modify>
+					{% endif %}
+    				</div>
+				<div class="form-group">
+					<input type="hidden" name="client_id_mod" value="{{client_id_mod}}">
+                                </div>
+				<div class="form-group">
+					<b>{{ form.name.label }}</b>
+					<input type="text" name="name" value="{{client.name}}" class="form-control">				</div>
+				<div class="form-group">
+					<b>{{ form.client_id.label }}</b>
+					<input type="text" name="client_id" value="{{client.client_id}}" class="form-control">
+				</div>
+				<div class="form-group">
+					<b>{{ form.client_secret.label }}</b>
+					<input type="text" name="client_secret" value="{{client.client_secret}}" class="form-control">
+				</div>
+				<div class="form-group">
+					<b>{{ form.access_token_url.label }}</b>
+					<input type="text" name="access_token_url" value="{{client.access_token_url}}" class="form-control">
+				</div>
+				<div class="form-group">
+					<b>{{ form.authorize_url.label }}</b>
+					<input type="text" name="authorize_url" value="{{client.authorize_url}}" class="form-control">
+				</div>
+				<div class="form-group">
+					<b>{{ form.api_base_url.label }}</b>
+					<input type="text" name="api_base_url"  value="{{client.api_base_url}}" class="form-control">
+				</div>
+				<div class="form-group">
+                                        <b>{{ form.logout_url.label }}</b>
+                                        <input type="text" name="logout_url"  value="{{client.logout_url}}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                        <b>{{ form.post_logout_redirect_uri.label }}</b>
+                                        <input type="text" name="post_logout_redirect_uri"  value="{{client.post_logout_redirect_uri}}" class="form-control">
+                                </div>
+				<div class="row">
+					<div class="col">
+						{{ form.submit(class="btn btn-md btn-primary btn-outlined") }}
+					</div>
+				</div>
+				{{ form.nonce() }}
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
